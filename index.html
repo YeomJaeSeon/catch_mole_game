@@ -4,8 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>catch Mole!!</title>
+    <script
+    src="https://kit.fontawesome.com/c41b27873a.js"
+    crossorigin="anonymous"
+  ></script>
+  <link rel="stylesheet" href="style.css">
+  <script src="src/main.js" defer></script>
 </head>
 <body>
-    
+    <section class="game">
+        <header class="game__header">
+            <button class="game__button">
+                <i class="fas fa-play"></i>
+            </button>
+            <span class="game__timer">0:0</span>
+            <section class="game__score">
+                <i class="fas fa-star"></i> : <span class="score__win">0</span> ll
+                <i class="fas fa-skull"></i> : <span class="score__lose">0</span>
+            </section>
+        </header>
+        <section class="game__field">
+            <section class="field__first">
+            <img src="./img/hole.png" alt="hole" class="field__item" data-id="1">
+            <img src="./img/hole.png" alt="hole" class="field__item" data-id="2">
+            <img src="./img/hole.png" alt="hole" class="field__item" data-id="3">
+            <img src="./img/hole.png" alt="hole" class="field__item" data-id="4">
+            <img src="./img/hole.png" alt="hole" class="field__item" data-id="5">
+        </section>
+        <section class="field__second">
+            <img src="./img/hole.png" alt="hole" class="field__item" data-id="6">
+            <img src="./img/hole.png" alt="hole" class="field__item" data-id="7">
+            <img src="./img/hole.png" alt="hole" class="field__item" data-id="8">
+            <img src="./img/hole.png" alt="hole" class="field__item" data-id="9">
+            <img src="./img/hole.png" alt="hole" class="field__item" data-id="10">
+        </section>
+        </section>
+    </section>
+    <section class="popup">
+        <button class="popup__button">
+            <i class="fas fa-redo"></i>
+        </button>
+        <span class="popup__message">HELLO</span>
+    </section>
 </body>
 </html>
