@@ -1,6 +1,6 @@
 "use strict";
 import * as sound from "./sound.js";
-const GAME_DURATION = 5;
+const GAME_DURATION = 20;
 
 const gameBtn = document.querySelector(".game__button");
 const gameTimer = document.querySelector(".game__timer");
