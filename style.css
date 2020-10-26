@@ -23,6 +23,7 @@ button:hover{
     background : url('./img/background.png') center/cover;
     border-radius: 20px;
     margin:auto;
+    cursor : url(img/hammer.png) 55 28, auto;
 }
 .game__header{
     display:flex;
