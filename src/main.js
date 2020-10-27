@@ -1,6 +1,11 @@
 "use strict";
 import * as sound from "./sound.js";
-const GAME_DURATION = 20;
+const GAME_DURATION = 5;
+
+const Reason = Object.freeze({
+  stop: "stop",
+  finish: "finish",
+});
 
 const gameBtn = document.querySelector(".game__button");
 const gameTimer = document.querySelector(".game__timer");
@@ -36,7 +41,7 @@ field.addEventListener("click", (event) => {
 
 gameBtn.addEventListener("click", () => {
   if (!started) startGame();
-  else stopGame();
+  else stop(Reason.stop);
 });
 popupBtn.addEventListener("click", () => {
   startGame();
@@ -55,23 +60,29 @@ function startGame() {
   startGameTimer();
   showGameButton();
 }
-function stopGame() {
-  sound.stopBg();
-  sound.playAlert();
-  started = false;
-  stopShowAndHideRepeat();
-  stopGameTimer();
-  showPopupWithMessage("REPLAY???");
-  hideGameButton();
-}
-function finishGame() {
-  sound.playFinish();
+function stop(reason) {
   sound.stopBg();
   started = false;
   stopShowAndHideRepeat();
   stopGameTimer();
-  showPopupWithMessage("타임 아웃!!");
   hideGameButton();
+  switch (reason) {
+    case Reason.finish:
+      sound.playFinish();
+      if (minusScore === 0) {
+        showPopupWithMessage("모두 잡았습니다!!!");
+      } else {
+        showPopupWithMessage(`${minusScore}마리 놓쳤습니다.ㅠ.ㅠ`);
+      }
+
+      break;
+    case Reason.stop:
+      sound.playAlert();
+      showPopupWithMessage("REPLAY???");
+      break;
+    default:
+      throw new Error("에러발생!");
+  }
 }
 
 function hideGameButton() {
@@ -114,7 +125,7 @@ function startGameTimer() {
   timer = setInterval(() => {
     upDateTimer(--remaintime);
     if (remaintime <= 0) {
-      finishGame();
+      stop(Reason.finish);
     }
   }, 1000);
 }
