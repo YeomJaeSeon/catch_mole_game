@@ -79,6 +79,5 @@ function randomInteger(min, max) {
 //min : inclided , max : not included
 function randomTime(min, max) {
   const time = (Math.random() * (max - min) + min) * 1000;
-  console.log(time);
   return time;
 }
