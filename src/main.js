@@ -1,11 +1,8 @@
 "use strict";
 import * as sound from "./sound.js";
-const GAME_DURATION = 5;
+import { Popup, Reason } from "./popup.js";
 
-const Reason = Object.freeze({
-  stop: "stop",
-  finish: "finish",
-});
+const GAME_DURATION = 5;
 
 const gameBtn = document.querySelector(".game__button");
 const gameTimer = document.querySelector(".game__timer");
@@ -16,10 +13,6 @@ const loseScore = document.querySelector(".score__lose");
 const fieldItems = document.querySelectorAll(".field__item");
 const field = document.querySelector(".game__field");
 
-const popup = document.querySelector(".popup");
-const popupBtn = document.querySelector(".popup__button");
-const popupMessage = document.querySelector(".popup__message");
-
 let started = false;
 let repeatTimer = undefined;
 let timer = undefined;
@@ -27,6 +20,9 @@ let selectedPosition = undefined;
 // 두더지가 나올 랜덤으로 선택된 구멍
 let minusScore = 0;
 let score = 0;
+
+const finishGameBanner = new Popup();
+finishGameBanner.setClickListener(startGame);
 
 field.addEventListener("click", (event) => {
   if (!started) return;
@@ -42,10 +38,6 @@ field.addEventListener("click", (event) => {
 gameBtn.addEventListener("click", () => {
   if (!started) startGame();
   else stop(Reason.stop);
-});
-popupBtn.addEventListener("click", () => {
-  startGame();
-  hidePopup();
 });
 
 function startGame() {
@@ -70,15 +62,17 @@ function stop(reason) {
     case Reason.finish:
       sound.playFinish();
       if (minusScore === 0) {
-        showPopupWithMessage("모두 잡았습니다!!!");
+        finishGameBanner.showPopupWithMessage("모두 잡았습니다!!");
       } else {
-        showPopupWithMessage(`${minusScore}마리 놓쳤습니다.ㅠ.ㅠ`);
+        finishGameBanner.showPopupWithMessage(
+          `${minusScore}마리 놓쳤습니다.ㅠ.ㅠ`
+        );
       }
 
       break;
     case Reason.stop:
       sound.playAlert();
-      showPopupWithMessage("REPLAY???");
+      finishGameBanner.showPopupWithMessage("REPLAY??");
       break;
     default:
       throw new Error("에러발생!");
@@ -105,13 +99,7 @@ function init() {
     item.setAttribute("src", "./img/hole.png");
   });
 }
-function showPopupWithMessage(text) {
-  popup.style.visibility = "visible";
-  popupMessage.innerText = text;
-}
-function hidePopup() {
-  popup.style.visibility = "hidden";
-}
+
 function showGameTimer() {
   gameTimer.style.visibility = "visible";
 }
