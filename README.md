@@ -3,6 +3,16 @@
 
 https://yeomjaeseon.github.io/catch_mole_game/
 
+## vanilla JS만을 통한 두더지 게임 구현
+
+## 클래스를 통한 모듈화
+- main.js, game.js, field.js, popup.js를 클래스를 통해서 모듈화  
+
+## 빌더 패턴
+`const game = new GameBuilder().withDuration(20).build();`   
+- 빌더패턴을 통한 객체생성
+
+
 ## 게임화면
 ### 게임 도중
 ![스크린샷(753)](https://user-images.githubusercontent.com/67785334/97397075-c2f42380-192b-11eb-8187-80a66fbba5bc.png)
